@@ -13,6 +13,11 @@ class FootballMatch {
         this.firstCommandGoals = firstCommandGoals
         this.secondCommandGoals = secondCommandGoals
     }
+
+    fun equals(other: FootballMatch): Boolean {
+        return this.firstCommandGoals == other.firstCommandGoals
+                && this.secondCommandGoals == other.secondCommandGoals
+    }
 }
 
 fun printMatches(info :String, matches :Collection<FootballMatch>) {
@@ -48,7 +53,9 @@ fun runTask1() {
             maxDiffMatchesSet.clear()
             maxDiffMatchesSet.add(match)
         } else if (matchDiff == maxDiff) {
-            maxDiffMatchesSet.add(match)
+            if (!maxDiffMatchesSet.any { it.equals(match) }) {
+                maxDiffMatchesSet.add(match)
+            }
         }
     }
 
