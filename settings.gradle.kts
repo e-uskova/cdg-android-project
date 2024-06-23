@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "cdg-android-project"
 include(":app")
- 
