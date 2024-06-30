@@ -2,4 +2,13 @@
     <string name="app_name">cdg-android-project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="round">Round 1</string>
+    <string name="date">Sunday, 30 June 2024 - 19:00</string>
+    <string name="home_team">Brentford</string>
+    <string name="home_team_score">2</string>
+    <string name="score_delimiter">-</string>
+    <string name="away_team_score">0</string>
+    <string name="away_team">Arsenal</string>
+    <string name="group">Group A</string>
+    <string name="location">Brentford Community Stadium</string>
 </resources>
