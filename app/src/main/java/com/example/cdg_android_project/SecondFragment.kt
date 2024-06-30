@@ -17,6 +17,7 @@ class SecondFragment : Fragment() {
         val binding = FragmentSecondBinding.inflate(inflater, container, false)
 
         (activity as AppCompatActivity).supportActionBar?.title = "Match details"
+        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(false)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         return binding.root

@@ -22,7 +22,9 @@ class FirstFragment : Fragment() {
             ft.commit()
         }
 
-        (activity as AppCompatActivity).supportActionBar?.title = "Premier League Fixtures"
+        (activity as AppCompatActivity).supportActionBar?.title = "  Premier League Fixtures"
+        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setLogo(R.drawable.baseline_sports_soccer_24)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         return binding.root
