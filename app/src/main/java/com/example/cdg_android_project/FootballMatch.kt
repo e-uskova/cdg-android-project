@@ -7,11 +7,11 @@ data class FootballMatch (
     var secondCommandGoals: Int = 0
 ) {
     fun setGoalsNum(
-        firstCommandGoals: Int,
-        secondCommandGoals: Int
+        newFirstCommandGoals: Int,
+        newSecondCommandGoals: Int
     ) {
-        this.firstCommandGoals = firstCommandGoals
-        this.secondCommandGoals = secondCommandGoals
+        firstCommandGoals = if (newFirstCommandGoals >= 0) newFirstCommandGoals else 0
+        secondCommandGoals = if (newSecondCommandGoals >= 0) newSecondCommandGoals else 0
     }
 }
 
@@ -39,14 +39,13 @@ fun runTask1() {
     printMatches("Матчи с неравным счетом", matches)
 
     // create set of matches, where max diff in goals
-    val maxDiffMatchesSet = mutableSetOf<FootballMatch>()
+    var maxDiffMatchesSet = mutableSetOf<FootballMatch>()
     var maxDiff = 0
     for (match in matches) {
         val matchDiff = abs(match.firstCommandGoals - match.secondCommandGoals)
         if (matchDiff > maxDiff) {
             maxDiff = matchDiff
-            maxDiffMatchesSet.clear()
-            maxDiffMatchesSet.add(match)
+            maxDiffMatchesSet = mutableSetOf(match)
         } else if (matchDiff == maxDiff) {
             maxDiffMatchesSet.add(match)
         }
