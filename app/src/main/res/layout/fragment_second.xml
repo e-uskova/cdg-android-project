@@ -17,7 +17,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/date"
+            android:text="@string/date_"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/round"
+            android:text="@string/round_"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +42,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:weightSum="3"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
@@ -51,68 +52,55 @@
             app:layout_constraintTop_toBottomOf="@+id/txtRound">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imgHomeTeam"
+                    android:contentDescription="@string/home_team_"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:src="@tools:sample/avatars" />
+                    android:layout_height="100dp"
+                    android:alpha="0.2"
+                    android:src="@drawable/football_club" />
 
                 <TextView
                     android:id="@+id/txtHomeTeam"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_team"
+                    android:layout_height="match_parent"
+                    android:text="@string/home_team_"
                     android:textAlignment="center"
                     android:textSize="24sp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/txtHomeScore"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical|right"
-                android:text="@string/home_team_score"
-                android:textSize="32sp" />
-
-            <TextView
-                android:id="@+id/txtDelim"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtScore"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/score_delimiter"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/txtAwayScore"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical|left"
-                android:text="@string/away_team_score"
-                android:textSize="32sp" />
+                android:text="@string/score_"
+                android:textSize="30sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imgAwayTeam"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:src="@tools:sample/avatars" />
+                    android:layout_height="100dp"
+                    android:alpha="0.2"
+                    android:src="@drawable/football_club" />
 
                 <TextView
                     android:id="@+id/txtAwayTeam"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/away_team"
+                    android:layout_height="match_parent"
+                    android:text="@string/away_team_"
                     android:textAlignment="center"
                     android:textSize="24sp" />
             </LinearLayout>
@@ -126,7 +114,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
-            android:text="@string/group"
+            android:text="@string/group_"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/txtLocation"
@@ -140,20 +128,20 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/location"
+            android:text="@string/location_"
             android:textAlignment="center"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtId"
+            app:layout_constraintBottom_toTopOf="@+id/txtMatchId"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/txtId"
+            android:id="@+id/txtMatchId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Match ID"
+            android:text="@string/match_id_"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
