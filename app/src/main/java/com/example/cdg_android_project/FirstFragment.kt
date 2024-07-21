@@ -22,17 +22,18 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentFirstBinding.inflate(inflater, container, false)
-
-        (activity as AppCompatActivity).supportActionBar?.title = "  Premier League Fixtures"
-        (activity as AppCompatActivity).supportActionBar?.setDisplayUseLogoEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setLogo(R.drawable.baseline_sports_soccer_24)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            title = "  Premier League Fixtures"
+            setDisplayUseLogoEnabled(true)
+            setLogo(R.drawable.baseline_sports_soccer_24)
+            setDisplayHomeAsUpEnabled(false)
+        }
 
         view.findViewById<RecyclerView>(R.id.recyclerView).apply {
             this.adapter = previewAdapter
