@@ -23,63 +23,36 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentSecondBinding.inflate(inflater, container, false)
-        return binding.root
+        return ComposeView(requireContext())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lateinit var match: FMatch
+
+        val bundle = arguments
+        if (bundle != null && bundle.containsKey("matchId")) {
+            val id = bundle.getString("matchId")?.toInt()
+            if (id != null) {
+                match = matchById(id)
+            } else {
+                throw NullPointerException()
+            }
+        } else {
+            throw NullPointerException()
+        }
+
+        (view as ComposeView).apply {
+            setContent {
+                Details(match = match)
+            }
+        }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.apply{
             title = "Match details"
             setDisplayUseLogoEnabled(false)
             setDisplayHomeAsUpEnabled(true)
         }
-
-        val bundle = arguments
-        if (bundle != null && bundle.containsKey("matchId")) {
-            val id = bundle.getString("matchId")?.toInt()
-            if (id != null) {
-                setMatchDetailsById(view, id)
-            }
-        }
-    }
-
-    private fun setMatchDetailsById(view: View, matchId: Int) {
-        // TODO get match info by id
-        val match = matchById(matchId)
-
-        // TODO set match info
-        view.apply {
-            findViewById<TextView>(R.id.txtDate).text = dateUtcFormatted(match.dateUtc)
-            findViewById<TextView>(R.id.txtRound).text = getString(R.string.round_msg, match.roundNumber)
-            findViewById<TextView>(R.id.txtHomeTeam).text = match.homeTeam
-            findViewById<TextView>(R.id.txtAwayTeam).text = match.awayTeam
-            findViewById<TextView>(R.id.txtScore).text = getString(R.string.score_msg, match.homeTeamScore, match.awayTeamScore)
-            findViewById<TextView>(R.id.txtGroup).text = if (match.group != null) getString(R.string.group_msg, match.group) else ""
-            findViewById<TextView>(R.id.txtLocation).text = match.location
-            findViewById<TextView>(R.id.txtMatchId).text = getString(R.string.match_id_msg, matchId)
-        }
-    }
-
-    private fun dateUtcFormatted(dateUtc: String): String {
-        val localDate = LocalDateTime
-            .parse(
-                dateUtc,
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss'Z'")
-            )
-            .atZone(ZoneId.of("UTC"))
-        val dayOfWeek = localDate.dayOfWeek.getDisplayName(
-            TextStyle.FULL,
-            Locale("en", "EN")
-        )
-        val formatter = DateTimeFormatter
-            .ofPattern(
-                "dd MMMM yyyy - HH:mm",
-                Locale("en", "EN")
-            )
-            .withZone(ZoneId.systemDefault())
-
-        return "$dayOfWeek, ${localDate.format(formatter)}"
     }
 }
