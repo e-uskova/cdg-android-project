@@ -8,8 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class PreviewAdapter : ListAdapter<String, PreviewAdapter.PreviewViewHolder>(previewDiffUtil()) {
+class PreviewAdapter : ListAdapter<Match, PreviewAdapter.PreviewViewHolder>(previewDiffUtil()) {
     private lateinit var previewListener : onItemClickListener
+
+    public override fun getItem(position: Int): Match {
+        return super.getItem(position)
+    }
 
     interface onItemClickListener {
         fun onItemClick(position: Int)
@@ -30,8 +34,9 @@ class PreviewAdapter : ListAdapter<String, PreviewAdapter.PreviewViewHolder>(pre
     }
 
     inner class PreviewViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: String) {
-            itemView.findViewById<TextView>(R.id.txtTeams).text = item
+        fun bind(item: Match) {
+            itemView.findViewById<TextView>(R.id.txtTeams).text = itemView.context.getString(R.string.teams_msg, item.homeTeam, item.awayTeam)
+            itemView.findViewById<TextView>(R.id.txtScore).text = itemView.context.getString(R.string.score_msg, item.homeTeamScore, item.awayTeamScore)
         }
 
         init {
@@ -42,7 +47,7 @@ class PreviewAdapter : ListAdapter<String, PreviewAdapter.PreviewViewHolder>(pre
     }
 }
 
-fun previewDiffUtil() = object : DiffUtil.ItemCallback<String>() {
-    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem
+fun previewDiffUtil() = object : DiffUtil.ItemCallback<Match>() {
+    override fun areItemsTheSame(oldItem: Match, newItem: Match): Boolean = oldItem == newItem
+    override fun areContentsTheSame(oldItem: Match, newItem: Match): Boolean = oldItem == newItem
 }
