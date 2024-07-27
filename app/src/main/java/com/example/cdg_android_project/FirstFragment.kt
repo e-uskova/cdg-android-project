@@ -42,9 +42,6 @@ class FirstFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         }
 
-        // TODO get data
-        //previewAdapter.submitList(generateFakeValues())
-
         lifecycleScope.launch(Dispatchers.IO) {
             previewAdapter.submitList(getData())
         }
@@ -52,10 +49,9 @@ class FirstFragment : Fragment() {
         previewAdapter.setOnItemClickListener(object : PreviewAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 val bundle = Bundle()
-                // TODO get id by position
-                bundle.putString("matchId", position.toString())
+                bundle.putParcelable("match", previewAdapter.getItem(position))
 
-                val details: SecondFragment = SecondFragment()
+                val details = SecondFragment()
                 details.setArguments(bundle)
 
                 val ft = getParentFragmentManager().beginTransaction()
@@ -65,14 +61,11 @@ class FirstFragment : Fragment() {
         })
     }
 
-    private suspend fun getData(): List<String> {
-        val listValues = mutableListOf<String>()
-        val webApi = WebApi()
-        webApi.getMatches().collect {
+    private suspend fun getData(): List<Match> {
+        val listValues = mutableListOf<Match>()
+        getMatchesInfo(20).collect {
             listValues.add(it)
         }
         return listValues
     }
-
-    private fun generateFakeValues(): List<String> = List(20) { i -> "Match $i"}
 }

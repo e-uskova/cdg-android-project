@@ -19,25 +19,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.cdg_android_project.FMatch
+import com.example.cdg_android_project.Match
 import com.example.cdg_android_project.R
-import com.example.cdg_android_project.mockMatch
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.time.format.TextStyle
-import java.util.Formatter
-import java.util.Locale
+import com.example.cdg_android_project.dateUtcFormatted
+import com.example.cdg_android_project.matchMock
 
 
 @Preview(showSystemUi = true)
 @Composable
-fun previewDetails() {
-    Details(match = mockMatch)
+fun PreviewDetails() {
+    Details(match = matchMock)
 }
 
 @Composable
-fun Details(match: FMatch) {
+fun Details(match: Match) {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
@@ -84,27 +79,6 @@ fun HeaderInfo(
                 .padding(top = 24.dp)
         )
     }
-}
-
-fun dateUtcFormatted(date: String): String {
-    val localDate = LocalDateTime
-        .parse(
-            date,
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss'Z'")
-        )
-        .atZone(ZoneId.of("UTC"))
-    val dayOfWeek = localDate.dayOfWeek.getDisplayName(
-        TextStyle.FULL,
-        Locale("en", "EN")
-    )
-    val formatter = DateTimeFormatter
-        .ofPattern(
-            "dd MMMM yyyy - HH:mm",
-            Locale("en", "EN")
-        )
-        .withZone(ZoneId.systemDefault())
-
-    return "$dayOfWeek, ${localDate.format(formatter)}"
 }
 
 @Composable
@@ -176,7 +150,7 @@ fun FooterInfo(
             .fillMaxWidth()
     ) {
         Text(
-            text = if (group != null) stringResource(R.string.group_msg, group) else "",
+            text = group ?: "",
             fontSize = 16.sp,
             modifier = Modifier
                 .padding(bottom = 24.dp)
