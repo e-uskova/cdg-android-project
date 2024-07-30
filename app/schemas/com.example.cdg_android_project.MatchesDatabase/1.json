@@ -1,0 +1,82 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "8b3e99e363e0dc8ceccb4e7cee06a9e2",
+    "entities": [
+      {
+        "tableName": "matches_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`matchNumber` INTEGER NOT NULL, `roundNumber` INTEGER NOT NULL, `dateUtc` TEXT NOT NULL, `location` TEXT NOT NULL, `homeTeam` TEXT NOT NULL, `awayTeam` TEXT NOT NULL, `group` TEXT, `homeTeamScore` INTEGER NOT NULL, `awayTeamScore` INTEGER NOT NULL, PRIMARY KEY(`matchNumber`))",
+        "fields": [
+          {
+            "fieldPath": "matchNumber",
+            "columnName": "matchNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "roundNumber",
+            "columnName": "roundNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateUtc",
+            "columnName": "dateUtc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "homeTeam",
+            "columnName": "homeTeam",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "awayTeam",
+            "columnName": "awayTeam",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "group",
+            "columnName": "group",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "homeTeamScore",
+            "columnName": "homeTeamScore",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "awayTeamScore",
+            "columnName": "awayTeamScore",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "matchNumber"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8b3e99e363e0dc8ceccb4e7cee06a9e2')"
+    ]
+  }
+}

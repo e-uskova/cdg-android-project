@@ -6,22 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cdg_android_project.Match.Companion.toMatchEntity
 import com.example.cdg_android_project.databinding.FragmentFirstBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FirstFragment : Fragment() {
     private val previewAdapter: PreviewAdapter by lazy { PreviewAdapter() }
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentFirstBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         return binding.root
     }
 
@@ -42,8 +46,8 @@ class FirstFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         }
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            previewAdapter.submitList(getData())
+        viewModel.matchesLiveData.observe(viewLifecycleOwner) {
+            previewAdapter.submitList(it)
         }
 
         previewAdapter.setOnItemClickListener(object : PreviewAdapter.onItemClickListener {
@@ -59,13 +63,5 @@ class FirstFragment : Fragment() {
                 ft.commit()
             }
         })
-    }
-
-    private suspend fun getData(): List<Match> {
-        val listValues = mutableListOf<Match>()
-        getMatchesInfo(20).collect {
-            listValues.add(it)
-        }
-        return listValues
     }
 }

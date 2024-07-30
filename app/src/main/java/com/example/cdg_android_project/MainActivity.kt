@@ -5,7 +5,12 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
+import com.example.cdg_android_project.Match.Companion.toMatchEntity
 import com.example.cdg_android_project.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,11 +36,22 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        getDataFromWeb()
+    }
+
+    private fun getDataFromWeb() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            getMatchesInfo(20).collect {
+                MatchesDatabase.getDatabase()?.matchesDao()?.addMatch(it.toMatchEntity())
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return false
     }
+
     private fun setNewFragment(fragment: Fragment) {
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frame_layout, fragment)

@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -97,15 +98,24 @@ fun TeamsScore(
     ) {
         Team(ImageBitmap.imageResource(
             id = R.drawable.football_club),
-            name = homeTeamName
+            name = homeTeamName,
+            modifier = Modifier
+                .weight(0.15f)
+                .fillMaxHeight(0.3f)
         )
         Text(
             text = "$homeTeamScore : $awayTeamScore",
-            fontSize = 30.sp
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .weight(0.1f)
         )
         Team(ImageBitmap.imageResource(
             id = R.drawable.football_club),
-            name = awayTeamName
+            name = awayTeamName,
+            modifier = Modifier
+                .weight(0.15f)
+                .fillMaxHeight(0.3f)
         )
     }
 }
@@ -113,11 +123,12 @@ fun TeamsScore(
 @Composable
 fun Team(
     image: ImageBitmap,
-    name: String
+    name: String,
+    modifier: Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
     ) {
         Image(
             bitmap = image,
