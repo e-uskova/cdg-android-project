@@ -1,10 +1,9 @@
 package com.example.cdg_android_project
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = MatchDao.MATCHES_TABLE)
+@Entity(tableName = MatchesRepository.MATCHES_TABLE)
 data class MatchEntity(
     @PrimaryKey(autoGenerate = false)
     val matchNumber: Int,

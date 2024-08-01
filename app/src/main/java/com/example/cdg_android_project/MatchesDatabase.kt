@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [MatchEntity::class], version = 1)
 abstract class MatchesDatabase : RoomDatabase() {
-    abstract fun matchesDao(): MatchDao
+    abstract fun matchesDao(): MatchesRepository
 
     companion object {
         private var INSTANCE: MatchesDatabase? = null
