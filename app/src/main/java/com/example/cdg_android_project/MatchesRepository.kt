@@ -9,7 +9,7 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface MatchDao {
+interface MatchesRepository {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addMatch(matchEntity: MatchEntity)
 

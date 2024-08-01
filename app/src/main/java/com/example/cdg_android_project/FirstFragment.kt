@@ -7,14 +7,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cdg_android_project.Match.Companion.toMatchEntity
 import com.example.cdg_android_project.databinding.FragmentFirstBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class FirstFragment : Fragment() {
     private val previewAdapter: PreviewAdapter by lazy { PreviewAdapter() }
