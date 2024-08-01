@@ -36,6 +36,7 @@ class PreviewAdapter : ListAdapter<Match, PreviewAdapter.PreviewViewHolder>(prev
     inner class PreviewViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Match) {
             itemView.findViewById<TextView>(R.id.txtTeams).text = itemView.context.getString(R.string.teams_msg, item.homeTeam, item.awayTeam)
+            itemView.findViewById<TextView>(R.id.txtDate).text = dateUtcFormatted(item.dateUtc)
             itemView.findViewById<TextView>(R.id.txtScore).text = itemView.context.getString(R.string.score_msg, item.homeTeamScore, item.awayTeamScore)
         }
 

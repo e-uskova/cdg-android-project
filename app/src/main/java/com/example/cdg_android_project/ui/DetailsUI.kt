@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cdg_android_project.Match
 import com.example.cdg_android_project.R
-import com.example.cdg_android_project.dateUtcFormatted
+import com.example.cdg_android_project.dateUtcFormattedWithWeekday
 import com.example.cdg_android_project.matchMock
 
 
@@ -68,7 +68,7 @@ fun HeaderInfo(
             .fillMaxWidth()
     ) {
         Text(
-            text = dateUtcFormatted(date),
+            text = dateUtcFormattedWithWeekday(date),
             fontSize = 20.sp,
             modifier = Modifier
                 .padding(top = 24.dp)
